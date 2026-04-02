@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard - Print Partners</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<div class="sidebar">
+
+<div class="sidebar-header">
+<span class="menu-toggle" onclick="toggleSidebar()">☰</span>
+<h2>Print Partners</h2>
+</div>
+
+<ul>
+<li id="ongoingTab" class="active" onclick="showOngoing()">Ongoing Orders</li>
+<li id="completedTab" onclick="showCompleted()">Completed Orders</li>
+</ul>
+
+</div>
+
+<div class="main-content">
+
+<header>
+<h1>Admin Dashboard</h1>
+
+<!-- ✅ LOGOUT BUTTON ADDED -->
+<button onclick="logout()" style="float:right;padding:8px 15px;cursor:pointer;">
+Logout
+</button>
+
+</header>
+
+<div class="stats">
+
+<div class="card" id="totalCard">
+<h3>Total Orders</h3>
+<p id="totalOrders">0</p>
+</div>
+
+<div class="card ongoing" id="ongoingCard">
+<h3>Ongoing Orders</h3>
+<p id="ongoingOrders">0</p>
+</div>
+
+<div class="card completed" id="completedCard">
+<h3>Completed Orders</h3>
+<p id="completedOrders">0</p>
+</div>
+
+</div>
+
+<div class="orders-section">
+
+<h2 id="ordersHeading">Ongoing Orders</h2>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Customer</th>
+<th>Contact</th>
+<th>Service</th>
+<th>Specification</th>
+<th>File</th>
+<th>Order Time</th>
+<th>Deadline</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+const token = localStorage.getItem("token");
+
+/* ✅ PROTECT PAGE + VERIFY TOKEN */
+if(!token){
+window.location.href = "login.html";
+}else{
+fetch("http://localhost:5000/api/orders",{
+headers:{
+Authorization:"Bearer "+token
+}
+}).then(res=>{
+if(res.status === 401 || res.status === 403){
+localStorage.removeItem("token");
+window.location.href = "login.html";
+}
+});
+}
+
+let currentView = "ongoing";
+
+async function loadOrders() {
+
+const res = await fetch("http://localhost:5000/api/orders",{
+headers:{
+Authorization:"Bearer "+localStorage.getItem("token")
+}
+});
+
+const orders = await res.json();
+
+renderOrders(orders);
+
+}
+
+function renderOrders(orders) {
+
+const tableBody = document.querySelector("tbody");
+tableBody.innerHTML = "";
+
+let ongoingCount = 0;
+let completedCount = 0;
+
+orders.forEach(order => {
+if (order.status === "Ongoing") ongoingCount++;
+if (order.status === "Completed") completedCount++;
+});
+
+const filteredOrders = orders.filter(order => {
+return currentView === "ongoing"
+? order.status === "Ongoing"
+: order.status === "Completed";
+});
+
+filteredOrders.forEach(order => {
+
+const row = document.createElement("tr");
+
+const now = new Date();
+const deadline = order.deadline ? new Date(order.deadline) : null;
+
+let warning = "";
+if (deadline && now > deadline && order.status !== "Completed") {
+warning = "⚠ Deadline Exceeded";
+}
+
+row.innerHTML = `
+<td>#${order._id}</td>
+<td>${order.name}</td>
+<td>${order.contact}</td>
+<td>${order.service}</td>
+<td>${order.specification}</td>
+<td>
+${order.file ? `<a href="http://localhost:5000/uploads/${order.file}" target="_blank">View File</a>` : "No File"}
+</td>
+<td>${new Date(order.createdAt).toLocaleString()}</td>
+<td>
+${order.deadline ? new Date(order.deadline).toLocaleString() : "No Deadline"}
+<br>
+<span style="color:red;font-weight:bold">${warning}</span>
+</td>
+<td>
+<span class="status ${order.status === 'Ongoing' ? 'ongoing-status' : 'completed-status'}">
+${order.status}
+</span>
+</td>
+<td>
+${order.status === "Ongoing"
+? `<button class="done-btn" onclick="markDone('${order._id}')">Mark as Done</button>`
+: ""}
+<button class="delete-btn" onclick="deleteOrder('${order._id}')">Delete</button>
+</td>
+`;
+
+tableBody.appendChild(row);
+
+});
+
+document.getElementById("totalOrders").textContent = orders.length;
+document.getElementById("ongoingOrders").textContent = ongoingCount;
+document.getElementById("completedOrders").textContent = completedCount;
+
+}
+
+async function markDone(id) {
+
+await fetch(`http://localhost:5000/api/orders/${id}`,{
+method:"PUT",
+headers:{
+Authorization:"Bearer "+localStorage.getItem("token")
+}
+});
+
+loadOrders();
+
+}
+
+async function deleteOrder(id) {
+
+const confirmDelete = confirm("Are you sure?");
+if (!confirmDelete) return;
+
+await fetch(`http://localhost:5000/api/orders/${id}`,{
+method:"DELETE",
+headers:{
+Authorization:"Bearer "+localStorage.getItem("token")
+}
+});
+
+loadOrders();
+
+}
+
+function logout(){
+localStorage.removeItem("token");
+window.location.href="login.html";
+}
+
+function showOngoing(){
+currentView="ongoing";
+document.getElementById("ordersHeading").textContent="Ongoing Orders";
+loadOrders();
+}
+
+function showCompleted(){
+currentView="completed";
+document.getElementById("ordersHeading").textContent="Completed Orders";
+loadOrders();
+}
+
+function toggleSidebar(){
+document.querySelector(".sidebar").classList.toggle("collapsed");
+}
+
+window.onload = loadOrders;
+
+</script>
+
+</body>
+</html>

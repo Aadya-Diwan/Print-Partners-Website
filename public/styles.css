@@ -1,0 +1,127 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(0,0,0,0.7);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    height: 55px;
+}
+
+.logo-text h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.logo-text p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Nav */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+/* About */
+.about {
+    padding: 40px 60px;
+    background: rgba(0,0,0,0.2);
+}
+
+/* Services */
+.features {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: white;
+    color: #2a5298;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.feature-card.alt-bg {
+    background: #f0f8ff;
+}
+
+.feature-card i {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+/* Contact */
+.contact {
+    padding: 50px;
+    background: rgba(0,0,0,0.3);
+    margin: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* Button */
+.order-btn {
+    display: inline-block;
+    margin-top: 25px;
+    background: linear-gradient(45deg, #1a2f5c, #2a5298);
+    color: #ffffff;
+    padding: 16px 45px;   /* bigger size */
+    font-size: 1.1rem;    /* slightly larger text */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.order-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(45deg, #142447, #1e3c72);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+}

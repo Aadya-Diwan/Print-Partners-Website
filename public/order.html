@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Your Order - Print Partners</title>
+<link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+
+<div class="container">
+<h1>Place Your Order</h1>
+
+<form id="orderForm">
+
+<label for="name">Your Name:</label>
+<input type="text" id="name" required>
+
+<label for="contact">Contact Number:</label>
+<input type="tel" id="contact" required>
+
+<label for="service">Select a Service:</label>
+<select id="service" required>
+
+<option value="" disabled selected>Select a service</option>
+
+<option value="photostat">Photostat</option>
+<option value="color_bw_printing">Color & B/W Printing</option>
+<option value="offset_printing">Offset Printing</option>
+<option value="drawing_print">Drawing Print</option>
+<option value="visiting_cards">Visiting Cards</option>
+<option value="posters">Posters</option>
+<option value="letterhead">Letter Head</option>
+<option value="id_cards">ID Cards</option>
+<option value="leaflets">Leaflets</option>
+<option value="brochures">Brochures</option>
+<option value="binding">Binding</option>
+<option value="bill_books">Bill Books</option>
+<option value="tshirt_printing">T-Shirt Printing</option>
+<option value="flex_standee">Flex/Standee</option>
+<option value="mug_printing">Mug Printing</option>
+
+</select>
+
+<label for="specifications">Specifications:</label>
+<select id="specifications" required>
+<option value="" disabled selected>Select a service first</option>
+</select>
+
+<label for="fileUpload">Upload Document:</label>
+<input type="file" id="fileUpload">
+
+<label for="deadline">Deadline (Optional):</label>
+<input type="datetime-local" id="deadline">
+
+<label for="instructions">Additional Instructions (Optional):</label>
+<textarea id="instructions" rows="4"></textarea>
+
+<button type="submit">Submit Order</button>
+
+</form>
+</div>
+
+<script src="order.js"></script>
+
+</body>
+</html>

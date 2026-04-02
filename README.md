@@ -125,21 +125,21 @@ Access:
 
 ### 🏠 Homepage
 
-<img width="1916" height="1033" alt="image" src="https://github.com/user-attachments/assets/ba43caf5-8767-4236-aed4-92e31987b356" />
+<img width="1911" height="1035" alt="image" src="https://github.com/user-attachments/assets/35597164-bbbf-4c7d-8070-5f93f4d809be" />
 
 ### 📝 Order Form
 
-<img width="635" height="966" alt="image" src="https://github.com/user-attachments/assets/9027050c-69c8-451e-a413-e760c3f6c5c0" />
+<img width="524" height="790" alt="image" src="https://github.com/user-attachments/assets/2a4ccfc2-e2ec-4324-8671-59d882c28bb0" />
 
 ### 🔐 Admin Login
 
-<img width="630" height="404" alt="image" src="https://github.com/user-attachments/assets/82c9e99b-e954-4af0-aba6-6e179448755c" />
+<img width="534" height="354" alt="image" src="https://github.com/user-attachments/assets/144408a0-1033-4ce8-835b-0984fc0d185a" />
 
 ### 📊 Admin Dashboard
 
-<img width="1899" height="1023" alt="image" src="https://github.com/user-attachments/assets/6338b196-cf7e-411b-92c2-92fec2389574" />
+<img width="1898" height="1028" alt="image" src="https://github.com/user-attachments/assets/786caac9-6c7e-41b0-b5d4-6e283be96715" />
 
-<img width="1901" height="1067" alt="image" src="https://github.com/user-attachments/assets/2f24f5f1-ca6b-4a42-8bb6-065f2657558c" />
+<img width="1894" height="1029" alt="image" src="https://github.com/user-attachments/assets/85753719-03c6-4e50-9e4c-38a50b21690e" />
 
 ---
 
